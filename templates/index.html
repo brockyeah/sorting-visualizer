@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Algorithm Visualizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+    <!-- Animated background gradient -->
+    <div class="background-gradient"></div>
+    
+    <!-- Main container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">Sorting Algorithm Visualizer</h1>
+            <p class="subtitle">Watch algorithms come to life</p>
+        </header>
+        
+        <!-- Control panel -->
+        <div class="control-panel">
+            <!-- Algorithm selection -->
+            <div class="control-group">
+                <label for="algorithm-select">Algorithm</label>
+                <select id="algorithm-select" class="control-select">
+                    <option value="bubble">Bubble Sort</option>
+                    <option value="selection">Selection Sort</option>
+                    <option value="insertion">Insertion Sort</option>
+                    <option value="merge">Merge Sort</option>
+                    <option value="quick">Quick Sort</option>
+                    <option value="heap">Heap Sort</option>
+                </select>
+            </div>
+            
+            <!-- Array size control -->
+            <div class="control-group">
+                <label for="array-size">Array Size: <span id="size-value">50</span></label>
+                <input type="range" id="array-size" class="control-slider" 
+                       min="10" max="100" value="50" step="5">
+            </div>
+            
+            <!-- Speed control -->
+            <div class="control-group">
+                <label for="speed-control">Speed: <span id="speed-value">50</span>ms</label>
+                <input type="range" id="speed-control" class="control-slider" 
+                       min="10" max="500" value="50" step="10">
+            </div>
+            
+            <!-- Action buttons -->
+            <div class="button-group">
+                <button id="start-btn" class="control-btn primary">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M4 2v12l10-6z"/>
+                    </svg>
+                    Start
+                </button>
+                <button id="pause-btn" class="control-btn" disabled>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M5 2h2v12H5zm4 0h2v12H9z"/>
+                    </svg>
+                    Pause
+                </button>
+                <button id="shuffle-btn" class="control-btn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M11 1h4v4l-1.5-1.5L10 7l-1.5-1.5L12 2zm-6 8.5L6.5 11 3 14.5 1.5 13H0v4h4l-1.5-1.5L6 12zm9.5 2.5L13 10.5 9.5 14l-3-3L5 12.5l3 3L11.5 16H16v-4z"/>
+                    </svg>
+                    Shuffle
+                </button>
+                <button id="reverse-btn" class="control-btn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 3L3 8l5 5v-3h5V6H8z"/>
+                    </svg>
+                    Reverse
+                </button>
+                <button id="reset-btn" class="control-btn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                        <path d="M8 1V0l3 2-3 2V3z"/>
+                    </svg>
+                    Reset
+                </button>
+            </div>
+        </div>
+        
+        <!-- Visualization area -->
+        <div class="visualization-container">
+            <div id="bars-container" class="bars-container"></div>
+            
+            <!-- Algorithm info display -->
+            <div class="info-panel">
+                <div class="info-item">
+                    <span class="info-label">Current Algorithm:</span>
+                    <span id="current-algorithm" class="info-value">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Status:</span>
+                    <span id="status" class="info-value">Ready</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Comparisons:</span>
+                    <span id="comparisons" class="info-value">0</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Swaps:</span>
+                    <span id="swaps" class="info-value">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color default"></div>
+                <span>Unsorted</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color comparing"></div>
+                <span>Comparing</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color swapping"></div>
+                <span>Swapping</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color sorted"></div>
+                <span>Sorted</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color pivot"></div>
+                <span>Pivot</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Include JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
