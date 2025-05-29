@@ -150,4 +150,4 @@ The application works best on:
 
 ## License
 
-This project is provided as educational material. Feel free to modify and extend it for learning purposes.v
+This project is provided as educational material. Feel free to modify and extend it for learning purposes.
